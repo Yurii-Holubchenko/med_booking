@@ -1,0 +1,29 @@
+# Other possible options https://github.com/github/gitignore/blob/main/Python.gitignore
+
+# IDE settings
+.idea
+.vscode
+*.swp
+*.swo
+
+# Env variables
+env
+venv
+.env
+.venv
+ENV
+
+# Distributives
+dist/
+build/
+*.egg-info/
+
+# Logs and caching
+*.log
+logs/
+.pytest_cache/
+.coverage
+htmlcov/
+__pycache__/
+*.py[cod]
+*$py.class
