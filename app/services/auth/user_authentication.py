@@ -1,4 +1,5 @@
-from app.services.access_token_generator import AccessTokenGenerator
+from app.services.auth.access_token_generator import AccessTokenGenerator
+from app.services.auth.refresh_token_generator import RefreshTokenGenerator
 
 class UserAuthentication:
   def __init__(self, email: str, password: str):
@@ -14,8 +15,9 @@ class UserAuthentication:
     access_token = AccessTokenGenerator(payload).generate()
 
     # Refresh token generation
+    refresh_token = RefreshTokenGenerator(user_id).generate()
 
     return {
       "access_token": access_token,
-      "refresh_token": "ref_token"
+      "refresh_token": refresh_token
     }

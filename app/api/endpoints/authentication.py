@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.services.user_authentication import UserAuthentication
+from app.services.auth.user_authentication import UserAuthentication
 
 router = APIRouter(tags=["authentication"])
 

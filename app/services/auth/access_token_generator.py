@@ -10,7 +10,8 @@ class AccessTokenGenerator:
     self.add_expiration()
 
     secret = os.getenv("JWT_SECRET_KEY")
-    jwt_token = jwt.encode(self.payload, secret, algorithm="HS256")
+    algorithm = os.getenv("JWT_ALGORITHM")
+    jwt_token = jwt.encode(self.payload, secret, algorithm=algorithm)
 
     return jwt_token
 
