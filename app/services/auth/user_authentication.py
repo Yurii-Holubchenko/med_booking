@@ -1,4 +1,4 @@
-from app.services.auth.access_token_generator import AccessTokenGenerator
+from app.services.auth.access_token_encryptor import AccessTokenEncryptor
 from app.services.auth.refresh_token_generator import RefreshTokenGenerator
 
 class UserAuthentication:
@@ -12,7 +12,10 @@ class UserAuthentication:
 
     # Access token generation
     payload = {"user_id": user_id}
-    access_token = AccessTokenGenerator(payload).generate()
+    access_token = AccessTokenEncryptor().generate(payload)
+
+    # For future decryption
+    # print(AccessTokenEncryptor().parse(access_token))
 
     # Refresh token generation
     refresh_token = RefreshTokenGenerator(user_id).generate()
