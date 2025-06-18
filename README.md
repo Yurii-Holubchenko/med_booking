@@ -7,6 +7,7 @@
 - `sqlalchemy` - ORM
 - `psycopg2-binary` - PostgreSQL driver
 - `pydantic` - Validation schemas
+- `` - Alembic
 
 ## DB and User creation:
 Open PostgreSQL console: \
