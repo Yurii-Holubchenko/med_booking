@@ -6,4 +6,4 @@ router = APIRouter(tags=["authentication"])
 
 @router.post("/login")
 async def login(user: Login):
-  return UserAuthentication(user.email, user.password).__call__()
+  return await UserAuthentication(user.email, user.password)()

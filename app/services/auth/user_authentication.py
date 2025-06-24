@@ -1,17 +1,19 @@
 from fastapi import HTTPException
+
+from app.db.database import db_connection
 from app.services.auth.access_token_encryptor import AccessTokenEncryptor
 from app.services.auth.refresh_token_generator import RefreshTokenGenerator
 
-from app.db.database import SessionLocal
-from app.db.models import User
+from app.services.user.find_user import FindUser
 
 class UserAuthentication:
   def __init__(self, email: str, password: str):
     self.email = email
     self.password = password
 
-  def __call__(self):
-    user = self.__find_user()
+  async def __call__(self):
+    db = next(db_connection())
+    user = await FindUser(self.email, self.password, db)()
 
     if not user:
       raise HTTPException(status_code=401, detail="User with email and password doesn't exist")
@@ -30,15 +32,3 @@ class UserAuthentication:
       "access_token": access_token,
       "refresh_token": refresh_token
     }
-
-  def __find_user(self):
-    db = SessionLocal()
-
-    user = db.query(User).filter(
-      User.email == self.email,
-      User.encrypted_password == self.password
-    ).first()
-
-    db.close()
-
-    return user
