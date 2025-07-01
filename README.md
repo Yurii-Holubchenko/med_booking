@@ -8,6 +8,7 @@
 - `psycopg2-binary` - PostgreSQL driver
 - `pydantic` - Validation schemas
 - `` - Alembic
+- `"passlib[bcrypt]" bcrypt==4.0.1` - password encryption
 
 ## DB and User creation:
 Open PostgreSQL console: \

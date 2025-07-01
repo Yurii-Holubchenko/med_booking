@@ -13,7 +13,7 @@ class AccessTokenEncryptor:
     self.fernet = Fernet(fernet_jwt_key.encode())
 
   # Generate JWT token
-  def generate(self, payload: dict[str, int]):
+  def generate(self, payload: dict[str, int]) -> str:
     jwt_payload = {
       "data": self.__encrypted_payload(payload),
       "expiration": self.__expiration()
@@ -24,7 +24,7 @@ class AccessTokenEncryptor:
     return jwt_token
 
   # Parse JWT token
-  def parse(self, jwt_token: str):
+  def parse(self, jwt_token: str) -> dict:
     decode_token = jwt.decode(jwt_token, self.jwt_secret, algorithms=[self.jwt_algorithm])
     encrypted_data = decode_token["data"]
     decrypted_json = self.fernet.decrypt(encrypted_data.encode())
