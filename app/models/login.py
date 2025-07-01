@@ -8,3 +8,7 @@ class Login(BaseModel):
 
   # *extra* - Allow extra attributes for model. Possible values: "ignore"(default), "allow", "forbid"
   # model_config = ConfigDict(extra="allow")
+
+class LoginResponse(BaseModel):
+  access_token: str
+  refresh_token: str

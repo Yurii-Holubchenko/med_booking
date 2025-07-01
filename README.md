@@ -7,8 +7,12 @@
 - `sqlalchemy` - ORM
 - `psycopg2-binary` - PostgreSQL driver
 - `pydantic` - Validation schemas
-- `` - Alembic
+- `email-validator` - Email validation for Pydantic
+- `alembic` - Alembic
 - `"passlib[bcrypt]" bcrypt==4.0.1` - password encryption
+
+## To install all PIP requirements:
+`pip install -r requirements.txt`
 
 ## DB and User creation:
 Open PostgreSQL console: \
