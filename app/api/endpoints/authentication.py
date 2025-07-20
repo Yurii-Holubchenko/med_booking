@@ -9,5 +9,6 @@ from app.db.database import db_connection
 router = APIRouter(tags=["authentication"])
 
 @router.post("/login", response_model=LoginResponse)
+# We can send parameter db, for example in tests
 async def login(user: Login, db: Session = Depends(db_connection)):
   return await UserAuthentication(user.email, user.password, db)()

@@ -36,9 +36,9 @@ class AccessTokenEncryptor:
     Add an expiration timestamp to the payload to make the access token value mutable.
     Otherwise, the access token will have a static value.
     """
-    current = datetime.now(timezone.utc)
-    delta = timedelta(minutes=15)
-    expiration_time = int((current + delta).timestamp())
+    current_time = datetime.now(timezone.utc)
+    time_delta = timedelta(minutes=15)
+    expiration_time = int((current_time + time_delta).timestamp())
 
     return expiration_time
 
