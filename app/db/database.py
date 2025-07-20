@@ -8,8 +8,8 @@ SessionLocal = sessionmaker(bind=engine, expire_on_commit=False, autoflush=False
 Base = declarative_base()
 
 def db_connection():
-  db = SessionLocal()
-  try:
-    yield db
-  finally:
-    db.close()
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
