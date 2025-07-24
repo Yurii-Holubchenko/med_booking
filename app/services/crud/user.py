@@ -13,3 +13,10 @@ async def update_refresh_token(user: User, refresh_token: str, expired_at: datet
     user.refresh_token_expired_at = expired_at
     db.add(user)
     db.commit()
+
+async def create_user(email: str, encrypted_password: str, db: Session) -> User:
+    user = User(email=email, encrypted_password=encrypted_password)
+    db.add(user)
+    db.commit()
+
+    return user
