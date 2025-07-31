@@ -9,3 +9,5 @@ class User(Base):
     encrypted_password = Column(String, nullable=False)
     refresh_token = Column(String, nullable=True)
     refresh_token_expired_at = Column(DateTime(timezone=True), nullable=True)
+    confirmation_token = Column(String, nullable=True)
+    confirmation_token_expired_at = Column(DateTime(timezone=True), nullable=True)
