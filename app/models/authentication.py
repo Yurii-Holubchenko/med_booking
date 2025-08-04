@@ -12,7 +12,3 @@ class Login(BaseModel):
 class LoginResponse(BaseModel):
     access_token: str
     refresh_token: str
-
-class RegistrationResponse(BaseModel):
-    id: int
-    email: EmailStr

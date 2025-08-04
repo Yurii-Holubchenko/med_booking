@@ -16,7 +16,7 @@ class Authentication:
     async def __call__(self) -> dict[str, str]:
         user = await find_user_by_email(self.email, self.db)
 
-        if user.confirmation_token:
+        if user and user.confirmation_token:
             raise HTTPException(status_code=403, detail="Email is not confirmed")
 
         if not user or not verify_password(self.password, user.encrypted_password):
