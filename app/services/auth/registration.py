@@ -3,7 +3,6 @@ from fastapi import HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from app.services.crud.user import find_user_by_email, create_user
 from app.core.security import encrypt_password
-from app.db.models.user import User
 from app.services.auth.confirmation_token_encryptor import ConfirmationTokenEncryptor
 from app.services.mailers.registration import send_confirmation_email
 
@@ -32,4 +31,4 @@ class Registration:
 
         self.background_tasks.add_task(send_confirmation_email, user.email, confirmation_token)
 
-        return {"message": "Email confirmation was sent"}
+        return {"message": f"Email confirmation was sent to {user.email}"}
