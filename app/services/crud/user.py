@@ -8,6 +8,11 @@ async def find_user_by_email(email: str, db: Session) -> Optional[User]:
 
     return user
 
+async def find_user_by_confirmation_token(token: str, db: Session) -> Optional[User]:
+    user = db.query(User).filter_by(confirmation_token=token).first()
+
+    return user
+
 async def update_refresh_token(user: User, refresh_token: str, expired_at: datetime, db: Session) -> None:
     user.refresh_token = refresh_token
     user.refresh_token_expired_at = expired_at
@@ -25,3 +30,8 @@ async def create_user(email: str, encrypted_password: str, confirmation_token: s
     db.commit()
 
     return user
+
+async def reset_confirmation_token(user: User, db: Session) -> None:
+    user.confirmation_token = None
+    user.confirmation_token_expired_at = None
+    db.commit()

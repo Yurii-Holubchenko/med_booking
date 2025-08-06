@@ -1,8 +1,8 @@
-import emails
+import emails, os
 from app.core.config import smtp_config
 
 def send_confirmation_email(email: str, confirmation_token: str):
-    confirmation_link = f"https://app-domain.com/confirm?token={confirmation_token}"
+    confirmation_link = f"{os.getenv("APP_URL")}/confirmation?token={confirmation_token}"
     subject = "Confirm your registration on MedBooking"
     body = f"Click the <a href='{confirmation_link}'>link</a> to confirm your registration."
 
