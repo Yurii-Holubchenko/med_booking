@@ -18,6 +18,7 @@ async def update_refresh_token(user: User, refresh_token: str, expired_at: datet
     user.refresh_token_expired_at = expired_at
     db.add(user)
     db.commit()
+    db.refresh(user)
 
 async def create_user(email: str, encrypted_password: str, confirmation_token: str, confirmation_token_expired_at: datetime, db: Session) -> User:
     user = User(
@@ -28,6 +29,7 @@ async def create_user(email: str, encrypted_password: str, confirmation_token: s
     )
     db.add(user)
     db.commit()
+    db.refresh(user)
 
     return user
 
@@ -35,3 +37,4 @@ async def reset_confirmation_token(user: User, db: Session) -> None:
     user.confirmation_token = None
     user.confirmation_token_expired_at = None
     db.commit()
+    db.refresh(user)

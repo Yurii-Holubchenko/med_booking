@@ -11,3 +11,5 @@ passlib[bcrypt]
 bcrypt==4.0.1
 alembic
 emails
+Jinja2
+slowapi

@@ -1,14 +1,21 @@
 import emails, os
 from app.core.config import smtp_config
+from app.utils.render_template import email_template
 
-def send_confirmation_email(email: str, confirmation_token: str):
+def send_confirmation_email(email: str, confirmation_token: str) -> None:
     confirmation_link = f"{os.getenv("APP_URL")}/confirmation?token={confirmation_token}"
     subject = "Confirm your registration on MedBooking"
-    body = f"Click the <a href='{confirmation_link}'>link</a> to confirm your registration."
 
+    html_content = email_template("confirmation.html", {
+        "confirmation_link": confirmation_link
+    })
+
+    send_email(email, subject, html_content)
+
+def send_email(email: str, subject: str, html_content: str) -> None:
     message = emails.Message(
         subject=subject,
-        html=body,
+        html=html_content,
         mail_from=(smtp_config.SMTP_FROM_NAME, smtp_config.SMTP_FROM)
     )
 
