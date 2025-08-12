@@ -8,8 +8,11 @@
 - `psycopg2-binary` - PostgreSQL driver
 - `pydantic` - Validation schemas
 - `email-validator` - Email validation for Pydantic
-- `alembic` - Alembic
+- `alembic` - DB migrations
 - `"passlib[bcrypt]" bcrypt==4.0.1` - password encryption
+- `emails` - Email sending
+- `Jinja2` - HTML templates
+- `slowapi` - Request numbers limiter
 
 ## To install all PIP requirements:
 `pip install -r requirements.txt`

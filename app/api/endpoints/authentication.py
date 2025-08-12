@@ -6,6 +6,7 @@ from app.core.request_limiter import limiter
 from app.services.auth.authentication import Authentication
 from app.services.auth.registration import Registration
 from app.services.auth.confirmation import Confirmation
+from app.services.auth.access_token_refresh import AccessTokenRefresh
 from app.models.authentication import Login, LoginResponse
 from app.db.database import db_connection
 
@@ -24,3 +25,7 @@ async def confirmation(token: str, db: Session = Depends(db_connection)):
 @router.post("/login", response_model=LoginResponse)
 async def login(user: Login, db: Session = Depends(db_connection)):
     return await Authentication(user.email, user.password, db)()
+
+@router.post("/access_token_refresh")
+async def access_token_refresh(refresh_token: str, db: Session = Depends(db_connection)):
+    return await AccessTokenRefresh(refresh_token, db)()

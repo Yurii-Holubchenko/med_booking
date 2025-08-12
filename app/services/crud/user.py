@@ -5,12 +5,14 @@ from datetime import datetime
 
 async def find_user_by_email(email: str, db: Session) -> Optional[User]:
     user = db.query(User).filter_by(email=email).first()
-
     return user
 
 async def find_user_by_confirmation_token(token: str, db: Session) -> Optional[User]:
     user = db.query(User).filter_by(confirmation_token=token).first()
+    return user
 
+async def find_user_by_refresh_token(token: str, db: Session) -> Optional[User]:
+    user = db.query(User).filter_by(refresh_token=token).first()
     return user
 
 async def update_refresh_token(user: User, refresh_token: str, expired_at: datetime, db: Session) -> None:
