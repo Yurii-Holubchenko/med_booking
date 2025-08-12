@@ -1,6 +1,4 @@
-import jwt
-import os
-import json
+import jwt, os, json
 from datetime import datetime, timedelta, timezone
 from cryptography.fernet import Fernet
 
