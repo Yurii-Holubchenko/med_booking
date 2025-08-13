@@ -25,9 +25,6 @@ class Authentication:
         # Access token generation
         access_token = AccessTokenEncryptor().generate({"user_id": user.id})
 
-        # For future decryption
-        # print(AccessTokenEncryptor().parse(access_token))
-
         # Refresh token generation
         refresh_token = await RefreshTokenEncryptor(user, self.db).generate()
 
