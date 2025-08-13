@@ -7,6 +7,7 @@ from app.services.auth.authentication import Authentication
 from app.services.auth.registration import Registration
 from app.services.auth.confirmation import Confirmation
 from app.services.auth.access_token_refresh import AccessTokenRefresh
+from app.services.auth.logout import Logout
 from app.models.authentication import Login, LoginResponse
 from app.db.database import db_connection
 
@@ -29,3 +30,7 @@ async def login(user: Login, db: Session = Depends(db_connection)):
 @router.post("/access_token_refresh")
 async def access_token_refresh(refresh_token: str, db: Session = Depends(db_connection)):
     return await AccessTokenRefresh(refresh_token, db)()
+
+@router.delete("/logout")
+async def logout(access_token: str, db: Session = Depends(db_connection)):
+    return await Logout(access_token, db)()
