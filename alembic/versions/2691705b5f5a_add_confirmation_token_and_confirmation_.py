@@ -20,7 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     op.add_column("users", sa.Column("confirmation_token", sa.String(), nullable=True))
-    op.add_column("users", sa.Column('confirmation_token_expired_at', sa.DateTime(timezone=True), nullable=True))
+    op.add_column("users", sa.Column("confirmation_token_expired_at", sa.DateTime(timezone=True), nullable=True))
 
 def downgrade() -> None:
     op.drop_column("users", "confirmation_token")

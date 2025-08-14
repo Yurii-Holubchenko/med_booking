@@ -1,7 +1,6 @@
 import hashlib
 
 from sqlalchemy.orm import Session
-from typing import Union
 from fastapi import HTTPException
 from datetime import datetime, timezone
 from app.services.crud.user import find_user_by_refresh_token
@@ -12,7 +11,7 @@ class AccessTokenRefresh:
         self.refresh_token = hashlib.sha256(refresh_token.encode()).hexdigest()
         self.db = db
 
-    async def __call__(self) -> Union[dict[str, str], HTTPException]:
+    async def __call__(self) -> dict[str, str]:
         user = await find_user_by_refresh_token(self.refresh_token, self.db)
 
         if not user:

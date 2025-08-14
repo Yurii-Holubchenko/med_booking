@@ -1,6 +1,5 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from typing import Union
 from app.services.auth.access_token_encryptor import AccessTokenEncryptor
 from app.services.auth.refresh_token_encryptor import RefreshTokenEncryptor
 
@@ -13,7 +12,7 @@ class Authentication:
         self.password = password
         self.db = db
 
-    async def __call__(self) -> Union[dict[str, str], HTTPException]:
+    async def __call__(self) -> dict[str, str]:
         user = await find_user_by_email(self.email, self.db)
 
         if user and user.confirmation_token:
