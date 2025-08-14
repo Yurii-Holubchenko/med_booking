@@ -11,3 +11,5 @@ class User(Base):
     refresh_token_expired_at = Column(DateTime(timezone=True), nullable=True)
     confirmation_token = Column(String, nullable=True)
     confirmation_token_expired_at = Column(DateTime(timezone=True), nullable=True)
+    reset_password_token = Column(String, nullable=True)
+    reset_password_token_expired_at = Column(DateTime(timezone=True), nullable=True)

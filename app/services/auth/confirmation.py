@@ -1,6 +1,5 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from typing import Union
 from app.services.crud.user import find_user_by_confirmation_token, reset_confirmation_token
 from datetime import datetime, timezone
 
@@ -9,7 +8,7 @@ class Confirmation:
         self.token = token
         self.db = db
 
-    async def __call__(self) -> Union[dict, HTTPException]:
+    async def __call__(self) -> dict[str, str]:
         user = await find_user_by_confirmation_token(self.token, self.db)
 
         if not user:

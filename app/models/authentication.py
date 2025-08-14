@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr, ConfigDict, Field
 
-class Login(BaseModel):
+class LoginParams(BaseModel):
     email: EmailStr
     password: str
 
@@ -12,3 +12,8 @@ class Login(BaseModel):
 class LoginResponse(BaseModel):
     access_token: str
     refresh_token: str
+
+class ResetPasswordConfirmationParams(BaseModel):
+    token: str
+    password: str
+    new_password: str

@@ -2,12 +2,24 @@ import emails, os
 from app.core.config import smtp_config
 from app.utils.render_template import email_template
 
-def send_confirmation_email(email: str, confirmation_token: str) -> None:
-    confirmation_link = f"{os.getenv("APP_URL")}/confirmation?token={confirmation_token}"
+def send_confirmation_email(email: str, token: str) -> None:
     subject = "Confirm your registration on MedBooking"
 
+    confirmation_link = f"{os.getenv("APP_URL")}/confirmation?token={token}"
     html_content = email_template("confirmation.html", {
         "confirmation_link": confirmation_link
+    })
+
+    send_email(email, subject, html_content)
+
+def send_password_reset_email(email: str, token: str) -> None:
+    subject = "Confirm your password reset on MedBooking"
+
+    # Should be a link to some frontend page /reset_password
+    # Where user will be able to set password and new password
+    reset_password_link = f"{os.getenv("APP_URL")}/reset_password?token={token}"
+    html_content = email_template("reset_password.html", {
+        "reset_password_link": reset_password_link
     })
 
     send_email(email, subject, html_content)
