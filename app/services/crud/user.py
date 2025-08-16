@@ -15,6 +15,9 @@ async def find_user_by_confirmation_token(token: str, db: Session) -> Optional[U
 async def find_user_by_refresh_token(token: str, db: Session) -> Optional[User]:
     return db.query(User).filter_by(refresh_token=token).first()
 
+async def find_user_by_reset_password_token(token: str, db: Session) -> Optional[User]:
+    return db.query(User).filter_by(reset_password_token=token).first()
+
 async def create_user(email: str, encrypted_password: str, token: str, expired_at: datetime, db: Session) -> User:
     user = User(
         email=email,
@@ -38,6 +41,14 @@ async def set_refresh_token(user: User, token: str, expired_at: datetime, db: Se
 async def set_reset_password_token(user: User, token: str, expired_at: datetime, db: Session) -> None:
     user.reset_password_token = token
     user.reset_password_token_expired_at = expired_at
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+
+async def set_new_password(user: User, encrypted_password: str, db: Session) -> None:
+    user.encrypted_password = encrypted_password
+    user.reset_password_token = None
+    user.reset_password_token_expired_at = None
     db.add(user)
     db.commit()
     db.refresh(user)
